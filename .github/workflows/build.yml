@@ -31,13 +31,12 @@ jobs:
         run: |
           PROJECT=$(dirname "$(find extracted -name settings.gradle.kts | head -1)")
           echo "PROJECT=$PROJECT" >> $GITHUB_ENV
-
-      - name: Build APK
-        run: |
-          cd "$PROJECT"
-          chmod +x gradlew
-          ./gradlew assembleDebug
-
+      
+- name: Build APK
+  run: |
+    cd "$PROJECT"
+    gradle assembleDebug
+    
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
